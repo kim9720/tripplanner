@@ -55,7 +55,11 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'tripplanner.urls'
-CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    # Add Vercel URL later
+]
 
 TEMPLATES = [
     {
@@ -80,10 +84,18 @@ WSGI_APPLICATION = 'tripplanner.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'trip_planner',   # your database name
+        'USER': 'trip_user',           # default MySQL user
+        'PASSWORD': '',           # empty password
+        'HOST': '127.0.0.1',      # use IP instead of 'localhost' to avoid socket issues
+        'PORT': '3307',           # default MySQL port
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
     }
 }
+
 
 
 # Password validation
